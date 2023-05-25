@@ -53,3 +53,33 @@ void free_line_lists(line_lists **head);
       /* Our lists2.c */
 r_vars *add_rvars_node(r_vars **head, int lvars, char *vars, int lvals);
 void free_rvars_list(r_vars **head);
+
+
+        /* Our mememory.c */
+void _memcpy(void *nptr, const void *ptr, unsigned int siz);
+void *_reallocs(void *ptr, unsigned int old_siz, unsigned int new_siz);
+char **_reallocdps(char **ptr, unsigned int old_siz, unsigned int new_siz);
+
+
+  /* Our stdlib.c */
+int get_len(int n);
+char *itoi(int n);
+int _atoi(char *s);
+
+    /* Our str1.c  */
+char *_strcat(char *dest, const char *sc);
+char *_strcpy(char *dest, char *sc);
+char *_strchr(char *s, char c);
+int _strcmp(char *s1, char *s2);
+int _strspn(char *s, char *accpt);
+
+   /* Our str2.c */
+char *strdup(const char *s);
+int strlen(const char *s);
+int cmp_char(char str[], const char *del);
+char *strtok(char str[], const char *del);
+int isdigit(const char *s);
+
+
+/* Our str3.c */
+void rev_strings(char *s);
