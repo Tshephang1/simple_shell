@@ -1,85 +1,82 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef ANDY_H
+#define ANDY_H
 
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
-#include <errno.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <limits.h>
 
-#define BUFSIZE 1024
-#define TOK_BUFSIZE 128
-#define TOK_DELIM " \t\r\n\a"
+#define BUFFER 1024
+#define TRUE 1
+#define PROMPT "$ "
+/* error strings */
+#define ERR_MALLOC "Unable to malloc space\n"
+#define ERR_FORK "Unable to fork and create child process\n"
+#define ERR_PATH "No such file or directory\n"
 
+extern char **_environ;
 
-         /* Our error1.c */
-char *strcat_ct(data_shell *, char *, char *, char *);
-char *err_get_ct(data_shell *datashell);
-char *err_not_found(data_shell *datashell);
-char *err_exit_shell(data_shell *datashell);
+/**
+ * struct list_s - linked list of variables
+ * @value: value
+ * @next: pointer to next node
+ *
+ * Description: generic linked list struct for variables.
+**/
 
+typedef struct list_s
+{
+	char *value;
+	struct list_s *next;
+} list_s;
 
-       /* Our error2.c */
-char *err_get_alias(char **args);
-char *err_env(data_shell *datashell);
-char *err_syntax(char **args);
-char *err_permission(char **args);
-char *err_path_126(data_shell *datashell);
+/**
+ * struct built_s - linked list of builtins
+ * @name: name of builtin
+ * @p: pointer to function
+ *
+ * Description: struct for builtin functions.
+**/
 
-     /* Our help.c */
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
-void help_general(void);
-void help_exit(void);
+typedef struct built_s
+{
+	char *name;
+	int (*p)(void);
+} built_s;
 
-   /* Our help2.c */
-void help(void);
-void help_alias(void);
-void help_cd(void);
+void prompts(int fd, struct stat buf);
+char *_getline(FILE *fp);
+char **conference(char *str);
+char *_which(char *command, char *fullpath, char *path);
+int tshephang(char *fullpath, char **_tokens);
+void error(int error);
 
+      /* free functions */
+void free_all(char **tokens, char *paths, char *lines, char *fullpaths, int flags);
+void free_dps(char **arrays, unsigned int lengths);
 
-    /* Our lists.c */
-se_list *add_se_node_end(se_list **head, char se);
-void free_se_list(se_list **head);
-line_lists *add_line_nod_end(line_lists **head, char *line);
-void free_line_lists(line_lists **head);
-
-      /* Our lists2.c */
-r_vars *add_rvars_node(r_vars **head, int lvars, char *vars, int lvals);
-void free_rvars_list(r_vars **head);
-
-
-        /* Our mememory.c */
-void _memcpy(void *nptr, const void *ptr, unsigned int siz);
-void *_reallocs(void *ptr, unsigned int old_siz, unsigned int new_siz);
-char **_reallocdps(char **ptr, unsigned int old_siz, unsigned int new_siz);
-
-
-  /* Our stdlib.c */
-int get_len(int n);
-char *itoi(int n);
-int _atoi(char *s);
-
-    /* Our str1.c  */
-char *_strcat(char *dest, const char *sc);
-char *_strcpy(char *dest, char *sc);
-char *_strchr(char *s, char c);
-int _strcmp(char *s1, char *s2);
-int _strspn(char *s, char *accpt);
-
-   /* Our str2.c */
-char *strdup(const char *s);
-int strlen(const char *s);
-int cmp_char(char str[], const char *del);
-char *strtok(char str[], const char *del);
-int isdigit(const char *s);
+  /* utility functions */
+void _puts(char *str);
+int _strlens(char *s);
+int _strcmps(char *name, char *var, unsigned int len);
+int _strncmps(char *name, char *var, unsigned int len);
+char *_strcpy(char *dest, char *src);
 
 
-/* Our str3.c */
-void rev_strings(char *s);
+   /* prototypes for the helper functions for path linked list */
+char *getenviron(const char *name);
+char **copyenv(char **_environcopy, unsigned int _environlength);
+list_s *pathlists(char *_variable, list_s *head);
+
+
+   /* prototypes for builtins */
+int shell_environ(void);
+int shell_exits(void);
+int builtinexecs(char **tokens);
+int shell_num_builtins(built_s builtins[]);
+
+
+#endif 
