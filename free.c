@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * free_all - free all mallocd space at end of main loop
+ * free_all - free mallocd spaces at end of main loop
  * @tokens: pointer to the tokens array
  * @paths: pointer to path variable.
  * @lines: pointer to the user input buffer
