@@ -55,7 +55,8 @@ int tshephang(char *fullpath, char **_tokens);
 void error(int error);
 
       /* free functions */
-void free_all(char **tokens, char *paths, char *lines, char *fullpaths, int flags);
+void free_all(char **tokens, char *paths, char *lines, char *fullpaths,
+int flags);
 void free_dps(char **arrays, unsigned int lengths);
 
   /* utility functions */
@@ -78,5 +79,4 @@ int shell_exits(void);
 int builtinexecs(char **tokens);
 int shell_num_builtins(built_s builtins[]);
 
-
-#endif 
+#endif

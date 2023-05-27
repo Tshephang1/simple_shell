@@ -11,7 +11,8 @@
  * Return: void
  */
 
-void free_all(char **tokens, char *paths, char *lines, char *fullpaths, int flags)
+void free_all(char **tokens, char *paths, char *lines, char *fullpaths,
+int flags)
 {
 	free(paths);
 	free(tokens);
