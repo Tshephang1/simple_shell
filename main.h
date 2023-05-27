@@ -1,30 +1,25 @@
-#ifndef ANDY_H
-#define ANDY_H
+#ifndef MAIN_H
+#define MAIN_H
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
-#include <unistd.h>
 #include <sys/stat.h>
-#include <sys/types.h>
+#include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 
 #define BUFFER 1024
 #define TRUE 1
 #define PROMPT "$ "
-/* error strings */
-#define ERR_MALLOC "Unable to malloc space\n"
-#define ERR_FORK "Unable to fork and create child process\n"
-#define ERR_PATH "No such file or directory\n"
 
 extern char **_environ;
 
 /**
- * struct list_s - linked list of variables
- * @value: value
- * @next: pointer to next node
- *
- * Description: generic linked list struct for variables.
+ * struct list_s - linked list of the variable
+ * @value: the value
+ * @next: pointer to the next node
+ * Description: generic linked list struct for the variables
 **/
 
 typedef struct list_s
@@ -34,11 +29,10 @@ typedef struct list_s
 } list_s;
 
 /**
- * struct built_s - linked list of builtins
- * @name: name of builtin
- * @p: pointer to function
- *
- * Description: struct for builtin functions.
+ * struct built_s - linked list of the builtin
+ * @name: name of the builtins
+ * @p: pointer to the function
+ * Description: structure for the builtin functions
 **/
 
 typedef struct built_s
@@ -58,6 +52,11 @@ void error(int error);
 void free_all(char **tokens, char *paths, char *lines, char *fullpaths,
 int flags);
 void free_dps(char **arrays, unsigned int lengths);
+
+     /* oUR error strings */
+#define ERR_MALLOC "Unable to malloc space\n"
+#define ERR_FORK "Unable to fork and create child process\n"
+#define ERR_PATH "No such file or directory\n"
 
   /* utility functions */
 void _puts(char *str);
