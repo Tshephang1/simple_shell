@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * main - use strtok to print tokens
+ * main - use strtok that prints some tokens
  * Return: success 0
  */
 
