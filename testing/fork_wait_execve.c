@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-*main - Create 5 child processes to execute "ls -l /tmp"
+*main - Create 5 child processes that execute "ls -l /tmp"
 * Return: 0 on success and 1 on error
 */
 
