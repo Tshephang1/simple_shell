@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _which - searche directorie in PATH variable for command
+ * _which - search directory in PATH variable for command
  * @_command: command to search for
  * @fullpath: the fullpath of command to execute
  * @_path: full path variable
